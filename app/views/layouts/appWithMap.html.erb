@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GeoReplay</title>
+  <%= stylesheet_link_tag "application", :media => "screen" %>
+  <%= stylesheet_link_tag "bootstrap.min", :media => "screen" %>
+  <%= javascript_include_tag "application" %>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?v=3.9&key=AIzaSyCCj-fR4vd7d0Ipp3lh5EnvEyVWs2uXRDc&sensor=false&libraries=drawing">
+  </script>
+  <%= javascript_include_tag "elabels3" %>
+  <%= javascript_include_tag "replay" %>
+  <script type="text/javascript">
+	  window.onload=replay_initialize;
+  </script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= javascript_include_tag "bootstrap.min" %>
+<%= render "header" %>
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row-fluid">
+   <div class="span12 text"><%= @replay.name %></div>
+</div>
+
+<div class="row-fluid">
+   <div id="map_canvas" class="span12">map goes here</div>
+</div>
+
+<p>
+  <b>Desc:</b>
+  <%= @replay.desc %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @replay.source %>
+</p>
+
+<p>
+  <b>Attribution:</b>
+  <%= @replay.attribution %>
+</p>
+
+<p>
+  <b>Userid:</b>
+  <%= @replay.userId %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @replay.length %>
+</p>
+
+<p>
+  <b>Screenshotpath:</b>
+  <%= @replay.screenshotPath %>
+</p>
+
+<p>
+  <b>Datapath:</b>
+  <%= @replay.dataPath %>
+</p>
+
+<p>
+  <b>Statusid:</b>
+  <%= @replay.statusId %>
+</p>
+
+<%= link_to 'Edit', edit_replay_path(@replay) %> |
+<%= link_to 'Back', replays_path %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  desc: MyString
+  source: MyText
+  attribution: MyString
+  userId: 1
+  length: 1
+  screenshotPath: MyText
+  dataPath: MyText
+  statusId: 1
+  insertDate: 2013-05-20 22:49:01
+  updateDate: 2013-05-20 22:49:01
+
+two:
+  name: MyString
+  desc: MyString
+  source: MyText
+  attribution: MyString
+  userId: 1
+  length: 1
+  screenshotPath: MyText
+  dataPath: MyText
+  statusId: 1
+  insertDate: 2013-05-20 22:49:01
+  updateDate: 2013-05-20 22:49:01

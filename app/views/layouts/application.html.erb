@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GeoReplay</title>
+  <%= stylesheet_link_tag "application", :media => "screen" %>
+  <%= stylesheet_link_tag "bootstrap.min", :media => "screen" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= javascript_include_tag "bootstrap.min" %>
+<%= render "header" %>
+<%= yield %>
+
+</body>
+</html>
