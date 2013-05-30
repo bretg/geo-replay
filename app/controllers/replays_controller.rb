@@ -9,6 +9,21 @@ class ReplaysController < ApplicationController
   def show
     @replay = Replay.find(params[:id])
 
+    if @replay.dataPath == ''
+	flash[:notice] = "no dataPath associated with replay"
+	redirect_to :back
+	return
+    end
+
+    begin
+	    @replaydata = File.read(@replay.dataPath)
+    rescue
+	    flash[:notice] = "invalid dataPath associated with replay"
+	    redirect_to :back
+	    return
+    end
+
+    # able to retreve the appData file, so render the view
     render :layout => "appWithMap"
 
     # can alter the layout based on the user. see rails layouts
@@ -73,6 +88,22 @@ class ReplaysController < ApplicationController
     respond_to do |format|
       format.html { redirect_to replays_url }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /replays/1/appData
+  # returns JSON data
+  def appdata
+    @replay = Replay.find(params[:id])
+
+    if @replay.dataPath != ''
+	    begin
+		    render :file => @replay.dataPath
+	    rescue
+		    render :inline => "{error: 'unable to open dataPath'}"
+	    end
+    else
+	    render :inline => "{error: 'no dataPath'}"
     end
   end
 end

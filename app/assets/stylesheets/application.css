@@ -15,12 +15,17 @@
   body { height: 100%; padding-left:5pt; padding: 0; overflow-y:auto; }
   .formlabel {font-size:90%; padding-top:6px; line-height:95%;}
   .text {padding-left: 5pt;}
+  .small-text {padding-left: 5pt; font-size: 80%; font-weight: bold;}
   .bordered {border: 1px solid #CCC; border-radius:3px;}
   .statistic {font-size: 75%;}
   .smallformlabel {font-size:75%; padding-top:0px; line-height:95%;}
   input {font-size:75%;}
   #appForm { height: 100% } 
-  #map_canvas {height: 350px } 
+  #map_canvas {height: 450px } 
   #appForm {height: 100%}
   #lineTable {font-size: 90%}
   #headerRow {background: #6699FF; font-size: 200%; color:yellow; font-weight: bold; text-align:left; padding-top: 10pt; padding-bottom: 10pt; padding-left: 5pt;}
+  .headerLink:link{ color: yellow; } 
+  .headerLink:visited{ color: yellow; } 
+  .headerLink:hover{ color: yellow; } 
+  .headerLink:active{ color: yellow; } 
