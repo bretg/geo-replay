@@ -1,6 +1,61 @@
-<h1>Editing replay</h1>
+<%= javascript_tag do %>
+	var replayData=<%= raw @replaydata %>;
+<% end %>
 
-<%= render 'form' %>
+<%= javascript_include_tag "replay_edit" %>
 
-<%= link_to 'Show', @replay %> |
-<%= link_to 'Back', replays_path %>
+<%= form_tag("/update", :method => "post" ) do %>
+		<div class="row-fluid">
+		   <div id="appRow" class="span7">
+			   <div class="row-fluid"> <!-- app data header -->
+				   <div class="span2" align="right"><div class="formlabel">Replay Name</div></div>
+				   <div class="span4"><input type="text" id="appName" class="input-block-level" onchange="setAppFieldValue('appName')"/></div>
+				   <div class="span3" align="right"><button type="button" id="saveButton" onclick="saveReplay()">Save Replay</button></div>
+				   <div class="span3"><button type="button" name="runButton" onclick="runReplay();">Preview Replay</button></div>
+			   </div>
+			   <div class="row-fluid"> <!-- app data header -->
+				   <div id="appDetails" class="span2" align="right">
+					   <a data-toggle="collapse" data-target="#appDataDiv" onclick="changeCollapseIcon();"><i class="icon-chevron-down"></i><strong>Details</strong></a>
+				   </div>
+				   <div class="span10"><hr></div>
+			   </div>
+			   <div id="appDataDiv" class="collapse in"> <!-- app data fields -->
+				   <div class="row-fluid">
+					   <div class="span2" align="right"><div class="formlabel">Map Type</div></div>
+					   <div class="span4"><select id="mapType" class="input-block-level" onchange="setMapType()"><option value="terrain">Terrain</option><option value="satellite">Satellite</option><option value="roadmap">Roadmap</option><option value="hybrid">satellite+roadmap</option></select></div>
+					   <div class="span2" align="right"><div class="formlabel">Map Features</div></div>
+					   <div class="span4"><select id="mapStyle" class="input-block-level" onchange="setMapStyle()"><option value="normal">Normal</option><option value="min">No roads</option></select></div>
+				   </div>
+				   <div class="row-fluid">
+					   <div class="span2" align="right"><div class="formlabel">Description</div></div>
+					   <div class="span10"><textarea id="appDescription" rows="1" class="input-block-level" onchange="setAppFieldValue('appDescription')"></textarea></div>
+				   </div>
+				   <div class="row-fluid">
+					   <div class="span2" align="right"><div class="formlabel">Sources</div></div>
+					   <div class="span10"><textarea id="sources" rows="1" class="input-block-level" onchange="setAppFieldValue('sources')"></textarea></div>
+				   </div>
+				   <div class="row-fluid">
+					   <div class="span2" align="right"><div class="formlabel">Author</div></div>
+					   <div class="span4"><input type="text" id="author" class="input-block-level" onchange="setAppFieldValue('author')"/></div>
+					   <div class="span2" align="right"><div class="formlabel"><a href="#" class="tagLabel" data-original-title="Suggestions: country, region, time period, purpose">Tags</a></div></div>
+					   <div class="span4"><textarea id="tags" rows="1" class="input-block-level" onchange="setAppFieldValue('tags')"></textarea></div>
+				   </div>
+				   <div class="row-fluid">
+					   <div class="span2" align="right"><div class="formlabel">Def Label Style</div></div>
+					   <div class="span4"><select id="defaultLabelStyle" class="input-block-level" onchange="setAppFieldValue('defaultLabelStyle')"><option value="labelStyle1" style="background: #FFFF00;">Yellow</option><option value="labelStyle2" style="background: #99FF66;">Green</option><option value="labelStyle3" style="background: #00FFFF;">Blue</option><option value="labelStyle4" style="background: #FF9933;">Orange</option><option value="labelStyle5" style="background: #FF8181;">Red</option><option value="labelStyle6" style="background: #E0E0EB;">Grey</option></select></div>
+					   <div class="span2" align="right"><div class="formlabel">Anim Duration</div></div>
+					   <div class="span4"><select id="animLength" class="input-block-level" onchange="setAppFieldValue('animLength')"><option value="5">5 sec</option><option value="10">10 sec</option><option value="15">15 sec</option><option value="20">20 sec</option><option value="30">30 sec</option><option value="45">45 sec</option><option value="60">60 sec</option></select></div>
+				   </div>
+			   </div> <!-- collapsible area -->
+			   <!-- put other app rows and map here -->
+			   <div class="row-fluid"> <!-- map center buttons -->
+				   <div class="span4" align="right"><button type="button" name="setCenterButton" onclick="setCenter()">Set Center</button></div>
+				   <div class="span4" align="center"><button type="button" name="setZoomButton" onclick="setZoom()">Set Zoom</button></div>
+				   <div class="span4" align="left"><button type="button" name="gotoCenterButton" onclick="toCenter()">To Center</button></div>
+			   </div>
+			   <div id="map_canvas" class="span12">map goes here</div>
+		   </div>
+		   <div id="pathDiv" class="span5"> <!-- path form area -->
+		   </div>
+	   </div>
+<% end %>

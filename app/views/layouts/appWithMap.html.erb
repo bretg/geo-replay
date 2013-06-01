@@ -13,8 +13,36 @@
 </head>
 <body>
 <%= javascript_include_tag "bootstrap.min" %>
-<%= render "header" %>
+<div class="row-fluid">
+	<div id="headerRow" class="span12"><table width="100%"><tr><td width="70%" align="left" valign="center"><%= link_to "Geo Replay", replays_path, { :class=>"headerLink bigtext" } %> <%= image_tag "history_replay_logo.png" %></td><td width="30%" align="right">
+<% if user_signed_in? %>
+	<%= link_to('New Replay', new_replay_path, {:class=>"headerLink" }) %> /
+	<%= link_to('Logout', destroy_user_session_path, {:method => :delete, :class=>"headerLink" }) %> /
+<% else %>
+  <%= link_to('Login', new_user_session_path, { :class=>"headerLink" })  %> /
+<% end %>
+<% if user_signed_in? %>
+  <%= link_to('Account', edit_user_registration_path, { :class=>"headerLink" }) %>
+<% else %>
+  <%= link_to('Register', new_user_registration_path, { :class=>"headerLink" })  %>
+<% end %>
+<br/>
+<div class="small-text">Logged in as <%= current_user.email %></div>
+</td></tr></table>
+   </div>
+</div>
+
+<div style="padding-left: 5pt;">
+
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+
 <%= yield %>
 
+</div>
 </body>
 </html>

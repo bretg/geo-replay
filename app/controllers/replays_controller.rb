@@ -32,19 +32,35 @@ class ReplaysController < ApplicationController
   end
 
   # GET /replays/new
-  # GET /replays/new.json
   def new
     @replay = Replay.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @replay }
+    begin
+	    @replaydata = File.read('public/appdata/replay_empty.json')
+    rescue
+	    flash[:notice] = "invalid dataPath associated with replay"
+	    redirect_to :back
+	    return
     end
+    render "edit", :layout => "appWithMap"
   end
 
   # GET /replays/1/edit
   def edit
     @replay = Replay.find(params[:id])
+    if @replay.dataPath == ''
+	flash[:notice] = "no dataPath associated with replay"
+	redirect_to :back
+	return
+    end
+
+    begin
+	    @replaydata = File.read(@replay.dataPath)
+    rescue
+	    flash[:notice] = "invalid dataPath associated with replay"
+	    redirect_to :back
+	    return
+    end
+    render :layout => "appWithMap"
   end
 
   # POST /replays
@@ -65,7 +81,7 @@ class ReplaysController < ApplicationController
 
   # PUT /replays/1
   # PUT /replays/1.json
-  def update
+  def update #upsert
     @replay = Replay.find(params[:id])
 
     respond_to do |format|

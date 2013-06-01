@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree .
  */
-  html { height: 100% }
+  html { height: 100%; padding-left:5pt; }
   body { height: 100%; padding-left:5pt; padding: 0; overflow-y:auto; }
   .formlabel {font-size:90%; padding-top:6px; line-height:95%;}
   .text {padding-left: 5pt;}
@@ -24,8 +24,11 @@
   #map_canvas {height: 450px } 
   #appForm {height: 100%}
   #lineTable {font-size: 90%}
-  #headerRow {background: #6699FF; font-size: 200%; color:yellow; font-weight: bold; text-align:left; padding-top: 10pt; padding-bottom: 10pt; padding-left: 5pt;}
+  #headerRow {background: #6699FF; font-size: 200%; color:yellow; font-weight: bold; text-align:left; padding-top: 10pt; padding-bottom: 10pt; padding-left: 5pt; padding-right:5pt;}
   .headerLink:link{ color: yellow; } 
   .headerLink:visited{ color: yellow; } 
   .headerLink:hover{ color: yellow; } 
   .headerLink:active{ color: yellow; } 
+  .bigtext { font-size: 200%; }
+  .formlabel {font-size:90%; padding-top:6px; line-height:95%;}
+  .smallformlabel {font-size:75%; padding-top:0px; line-height:95%;

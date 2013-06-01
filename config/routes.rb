@@ -1,10 +1,13 @@
 GeoReplay::Application.routes.draw do
+  devise_for :users
+
   resources :replays do
 	  member do
 		  get 'appdata'
 	  end
   end
 
+  root :to => "replays#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,21 @@
+{
+   "appName":"",
+   "appDescription":"",
+   "sources":"",
+   "mapCenter": { "lat":42, "lng":-87.624333 },
+   "mapZoom": 7,
+   "mapType": "terrain",
+   "mapStyle": "normal",
+   "labelStyles": [ {"name":"labelStyle1", "value":"border: 1px solid black; margin-top: 2px; background: #FFFF00; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ,
+                   {"name":"labelStyle2", "value":"border: 1px solid black; margin-top: 2px; background: #99FF66; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle3", "value":"border: 1px solid black; margin-top: 2px; background: #00FFFF; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle4", "value":"border: 1px solid black; margin-top: 2px; background: #FF9933; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle5", "value":"border: 1px solid black; margin-top: 2px; background: #FF8181; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"}
+                 ],
+   "defaultLabelStyle":"labelStyle1",
+   "animLength":30,
+   "animSmoothness":20,
+   "paths" : [ 
+             ]
+}
