@@ -64,15 +64,41 @@ class ReplaysController < ApplicationController
   end
 
   # POST /replays
-  # POST /replays.json
   def create
-    @replay = Replay.new(params[:replay])
+	@data=request.filtered_parameters
+	@replay = Replay.new()
+	@replay.name=@data['appName']
+	@replay.desc=@data['appDescription']
+	@replay.source=@data['sources']
+	@replay.attribution=@data['author']
+	@replay.userId=current_user.id
+	@replay.length=@data['animLength']
+	@replay.screenshotPath=''
+	@replay.dataPath=''
+	@replay.statusId=0
+	logger.debug "request: #{request}"
+	logger.debug "data: #{@data}"
 
     respond_to do |format|
       if @replay.save
+	@filePath='/appdata/replay_'+@replay.id.to_s()+'.json'
+	@replay.dataPath='/public'+@filePath
+	@data['dataPath']=@replay.dataPath
+	@data['id']=@replay.id
+	@jsondata=@data.to_json(:except => ['controller','replay', 'action'])
+	logger.debug "data: "+@jsondata
+	begin
+	   logger.debug "trying to write file: "+Rails.public_path+@filePath
+	   File.open(Rails.public_path+@filePath, 'w') {|f| f.write(@jsondata) }
+   	   @replay.update("dataPath"=>@replay.dataPath)
+	rescue
+	   format.html { redirect_to @replay, notice: 'unable to write appdata json.' }
+	   format.json { render json: @replay, status: 'unable to write appdata json.' }
+	end
+	# create and write succeeded
         format.html { redirect_to @replay, notice: 'Replay was successfully created.' }
         format.json { render json: @replay, status: :created, location: @replay }
-      else
+      else # create failed
         format.html { render action: "new" }
         format.json { render json: @replay.errors, status: :unprocessable_entity }
       end
@@ -80,8 +106,7 @@ class ReplaysController < ApplicationController
   end
 
   # PUT /replays/1
-  # PUT /replays/1.json
-  def update #upsert
+  def update
     @replay = Replay.find(params[:id])
 
     respond_to do |format|

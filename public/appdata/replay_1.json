@@ -1,7 +1,10 @@
 {
+   "id":1,
    "appName":"test app",
    "appDescription":"trying crazy features",
    "sources":"made it up",
+   "author":"me",
+   "status":"0",
    "mapCenter": { "lat":42, "lng":-87.624333 },
    "mapZoom": 7,
    "mapType": "terrain",

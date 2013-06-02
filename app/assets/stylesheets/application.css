@@ -11,8 +11,8 @@
  *= require_self
  *= require_tree .
  */
-  html { height: 100%; padding-left:5pt; }
-  body { height: 100%; padding-left:5pt; padding: 0; overflow-y:auto; }
+  html { height: 100%; }
+  body { height: 100%; padding: 0; overflow-y:auto; }
   .formlabel {font-size:90%; padding-top:6px; line-height:95%;}
   .text {padding-left: 5pt;}
   .small-text {padding-left: 5pt; font-size: 80%; font-weight: bold;}
