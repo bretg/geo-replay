@@ -45,5 +45,13 @@
 
 <p>
 
-<%= link_to 'Edit', edit_replay_path(@replay) %> |
-<%= link_to 'Back', replays_path %>
+<% if user_signed_in? %>
+	<% if current_user.id == @replay.userId %>
+		<script type="text/javascript">
+			function gotoEdit () {
+			   window.location="<%= edit_replay_path(@replay) %>";
+			}
+		</script>
+		<button type="button" id="saveButton" onclick="gotoEdit()">Edit Replay</button>
+	<% end %>
+<% end %>

@@ -18,16 +18,13 @@
 <% if user_signed_in? %>
 	<%= link_to('New Replay', new_replay_path, {:class=>"headerLink" }) %> /
 	<%= link_to('Logout', destroy_user_session_path, {:method => :delete, :class=>"headerLink" }) %> /
-<% else %>
-  <%= link_to('Login', new_user_session_path, { :class=>"headerLink" })  %> /
-<% end %>
-<% if user_signed_in? %>
   <%= link_to('Account', edit_user_registration_path, { :class=>"headerLink" }) %>
-<% else %>
-  <%= link_to('Register', new_user_registration_path, { :class=>"headerLink" })  %>
-<% end %>
 <br/>
 <div class="small-text">Logged in as <%= current_user.email %></div>
+<% else %>
+  <%= link_to('Login', new_user_session_path, { :class=>"headerLink" })  %> /
+  <%= link_to('Register', new_user_registration_path, { :class=>"headerLink" })  %>
+<% end %>
 </td></tr></table>
    </div>
 </div>

@@ -1,11 +1,18 @@
 class ReplaysController < ApplicationController
-  # GET /replays
+  # --------------------------------------------------------------
+  # HOME PAGE
+  #     GET /replays
+  #
   def index
     @replays = Replay.all
     render
   end
 
-  # GET /replays/1
+  # --------------------------------------------------------------
+  # SHOW
+  #    GET /replays/1
+  # regular view of replay
+  #
   def show
     @replay = Replay.find(params[:id])
 
@@ -25,26 +32,32 @@ class ReplaysController < ApplicationController
 
     # able to retreve the appData file, so render the view
     render :layout => "appWithMap"
-
-    # can alter the layout based on the user. see rails layouts
-    # search for current_user
-    #
   end
 
-  # GET /replays/new
+  # --------------------------------------------------------------
+  # NEW
+  #
+  #     GET /replays/new
+  # 
+  # This is called when the "New Replay" link in the header is clicked
+  #
   def new
     @replay = Replay.new
     begin
 	    @replaydata = File.read('public/appdata/replay_empty.json')
     rescue
-	    flash[:notice] = "invalid dataPath associated with replay"
+	    flash[:notice] = "cannot find blank replay JSON file"
 	    redirect_to :back
 	    return
     end
     render "edit", :layout => "appWithMap"
   end
 
-  # GET /replays/1/edit
+  # --------------------------------------------------------------
+  # EDIT
+  #
+  #     GET /replays/1/edit
+  #
   def edit
     @replay = Replay.find(params[:id])
     if @replay.dataPath == ''
@@ -63,10 +76,16 @@ class ReplaysController < ApplicationController
     render :layout => "appWithMap"
   end
 
-  # POST /replays
+  # --------------------------------------------------------------
+  # CREATE
+  #
+  #     POST /replays
+  #
+  # Called by edit view when there's no app ID
+  #
   def create
-	@data=request.filtered_parameters
 	@replay = Replay.new()
+	@data=request.filtered_parameters
 	@replay.name=@data['appName']
 	@replay.desc=@data['appDescription']
 	@replay.source=@data['sources']
@@ -79,18 +98,18 @@ class ReplaysController < ApplicationController
 	logger.debug "request: #{request}"
 	logger.debug "data: #{@data}"
 
-    respond_to do |format|
+    respond_to do |format|   # should be a JSON request
       if @replay.save
 	@filePath='/appdata/replay_'+@replay.id.to_s()+'.json'
-	@replay.dataPath='/public'+@filePath
+	@replay.dataPath='public'+@filePath
 	@data['dataPath']=@replay.dataPath
 	@data['id']=@replay.id
 	@jsondata=@data.to_json(:except => ['controller','replay', 'action'])
 	logger.debug "data: "+@jsondata
-	begin
+	begin  # try to create the appdata file
 	   logger.debug "trying to write file: "+Rails.public_path+@filePath
 	   File.open(Rails.public_path+@filePath, 'w') {|f| f.write(@jsondata) }
-   	   @replay.update("dataPath"=>@replay.dataPath)
+   	   Replay.update(@replay.id,"dataPath"=>@replay.dataPath) # update DB with filename
 	rescue
 	   format.html { redirect_to @replay, notice: 'unable to write appdata json.' }
 	   format.json { render json: @replay, status: 'unable to write appdata json.' }
@@ -105,16 +124,45 @@ class ReplaysController < ApplicationController
     end
   end
 
-  # PUT /replays/1
+  # --------------------------------------------------------------
+  # UPDATE
+  #
+  #    PUT /replays/1
+  #
+  # hit from edit view when ID is non-zero
+  #
   def update
-    @replay = Replay.find(params[:id])
+    	@replay = Replay.find(params[:id])
+	@data=request.filtered_parameters
+	logger.debug "data: #{@data}"
 
-    respond_to do |format|
-      if @replay.update_attributes(params[:replay])
-        format.html { redirect_to @replay, notice: 'Replay was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
+	if @replay.userId!=current_user.id  # only let right user update replay
+	   render json: @replay, status: 'not permitted'
+	end
+
+    respond_to do |format|   # should be a JSON request
+      if Replay.update(@replay.id, :name=>@data['appName'],
+			:desc=>@data['appDescription'],
+			:source=>@data['sources'],
+			:attribution=>@data['author'],
+			:length=>@data['animLength'],
+			:statusId=>0)
+	@filePath='/appdata/replay_'+@replay.id.to_s()+'.json' # dropping off the /public part
+	@data['dataPath']=@replay.dataPath # make sure user doesn't screw it up
+	@jsondata=@data.to_json(:except => ['controller','replay', 'action', 'updated_at', 'userId'])
+	logger.debug "data to save: "+@jsondata
+	begin  # try to create the appdata file
+	   logger.debug "trying to write file: "+Rails.public_path+@filePath
+	   File.open(Rails.public_path+@filePath, 'w') {|f| f.write(@jsondata) }
+	rescue
+	   format.html { redirect_to @replay, notice: 'unable to write appdata json.' }
+	   format.json { render json: @replay, status: 'unable to write appdata json.' }
+	end
+	# create and write succeeded
+        format.html { redirect_to @replay, notice: 'Replay was successfully created.' }
+        format.json { render json: @replay, status: :created, location: @replay }
+      else # create failed
+        format.html { render action: "new" }
         format.json { render json: @replay.errors, status: :unprocessable_entity }
       end
     end
