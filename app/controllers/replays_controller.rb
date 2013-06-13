@@ -4,7 +4,7 @@ class ReplaysController < ApplicationController
   #     GET /replays
   #
   def index
-    @replays = Replay.all
+    @replays = Replay.where('statusId>0')
     render
   end
 
@@ -14,7 +14,22 @@ class ReplaysController < ApplicationController
   # regular view of replay
   #
   def show
-    @replay = Replay.find(params[:id])
+
+    begin
+	    @replay = Replay.find(params[:id])
+    rescue
+	    flash[:error] = "sorry, no such replay"
+	    redirect_to :root
+	    return
+    end
+
+
+    # make sure this user can see this replay
+    if (@replay.statusId == "0") and (@replay.userId!=current_user.id)
+	flash[:notice] = "sorry, can't show you specified replay"
+	redirect_to :back
+	return
+    end
 
     if @replay.dataPath == ''
 	flash[:notice] = "no dataPath associated with replay"
@@ -94,7 +109,7 @@ class ReplaysController < ApplicationController
 	@replay.length=@data['animLength']
 	@replay.screenshotPath=''
 	@replay.dataPath=''
-	@replay.statusId=0
+	@replay.statusId=@data['status']=="1" ? 1 : 0
 	logger.debug "request: #{request}"
 	logger.debug "data: #{@data}"
 
@@ -146,7 +161,7 @@ class ReplaysController < ApplicationController
 			:source=>@data['sources'],
 			:attribution=>@data['author'],
 			:length=>@data['animLength'],
-			:statusId=>0)
+			:statusId=>@data['status']=="1" ? 1 : 0)
 	@filePath='/appdata/replay_'+@replay.id.to_s()+'.json' # dropping off the /public part
 	@data['dataPath']=@replay.dataPath # make sure user doesn't screw it up
 	@jsondata=@data.to_json(:except => ['controller','replay', 'action', 'updated_at', 'userId'])

@@ -49,9 +49,10 @@
 			   </div> <!-- collapsible area -->
 			   <!-- put other app rows and map here -->
 			   <div class="row-fluid"> <!-- map center buttons -->
-				   <div class="span4" align="right"><button type="button" name="setCenterButton" onclick="setCenter()">Set Center</button></div>
-				   <div class="span4" align="center"><button type="button" name="setZoomButton" onclick="setZoom()">Set Zoom</button></div>
-				   <div class="span4" align="left"><button type="button" name="gotoCenterButton" onclick="toCenter()">To Center</button></div>
+				   <div class="span3" align="right"><button type="button" name="setCenterButton" onclick="setCenter()">Set Center</button></div>
+				   <div class="span3" align="center"><button type="button" name="setZoomButton" onclick="setZoom()">Set Zoom</button></div>
+				   <div class="span3" align="left"><button type="button" name="gotoCenterButton" onclick="toCenter()">To Center</button></div>
+				   <div class="span3" align="center"><select id="status" class="input-block-level" onchange="setAppFieldValue('status')"><option value="0">Private</option><option value="1">Public</option></select></div>
 			   </div>
 			   <div id="map_canvas" class="span12">map goes here</div>
 		   </div>

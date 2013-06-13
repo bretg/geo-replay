@@ -27,12 +27,11 @@
 
 <div style="padding-left: 5pt;">
 
-    <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-    <% if flash[:error] %>
-      <p class="error"><%= flash[:error] %></p>
-    <% end %>
+  <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+              <%= value %>
+        </div>
+  <% end %>
 
 <%= yield %>
 </div>
