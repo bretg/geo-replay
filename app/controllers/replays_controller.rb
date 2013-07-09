@@ -59,7 +59,9 @@ class ReplaysController < ApplicationController
   def new
     @replay = Replay.new
     begin
-	    @replaydata = File.read('public/appdata/replay_empty.json')
+        @path=Rails.root.to_s+"/public/appdata/replay_empty.json"
+        logger.info "try to read #{@path}"
+	    @replaydata = File.read("#{@path}")
     rescue
 	    flash[:notice] = "cannot find blank replay JSON file"
 	    redirect_to :back
