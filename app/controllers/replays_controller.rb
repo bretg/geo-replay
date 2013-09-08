@@ -185,8 +185,13 @@ class ReplaysController < ApplicationController
     end
   end
 
-  # DELETE /replays/1
-  # DELETE /replays/1.json
+# --------------------------------------------------------------
+# DELETE
+#
+# removes chosen replay
+#
+# DELETE /replays/1
+# DELETE /replays/1.json
   def destroy
     @replay = Replay.find(params[:id])
     @replay.destroy
