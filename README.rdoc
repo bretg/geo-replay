@@ -9,8 +9,8 @@ and then push a "play" button to watch icons trace the path(s). I thought it mig
 create historic 'simulations' that gave a more visceral feeling about the geography and time. Planned topics
 included:
 
-* *Pony Express vs Transcontinental Railroad* -- They followed similar paths around the same period. This is the one that got finished. It's part of the "test" directory.
-* *Presidential travels of George Washington vs travels of some modern day President* -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his 8 years of travels concurrent with a recent president.
+* Pony Express vs Transcontinental Railroad -- They followed similar paths around the same period. This is the one that got finished. It's part of the "test" directory.
+* Presidential travels of George Washington vs travels of some modern day President -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his 8 years of travels concurrent with a recent president.
 * Battle lines -- find an interesting battle of the Revolution or Civil War and trace it out in time and geography
 
 The system was designed to be a multi-user web site with people being able to create 'replays' privately
@@ -43,27 +43,27 @@ Tables still on the drawing board: Tags, Markers, Styles, Metrics
 
 A sample JSON file that feeds replay.js and replay_edit.js
 
-var appData = {
-"appName":"Pony Express vs Transcontinenal Railroad",
-"appDescription":"Compares the paths of the Pony Express (1860) and the Transcontinental Railroad (1869)",
-"author":"bretg",
-"tags":"history, united states, 1800's",
-"sources":"wikipedia",
-"mapCenter":{"lat":39.5,"lng":-98.35},
-"mapZoom":4,
-"mapType":"roadmap",
-"mapStyle":"normal",
-"defaultLabelStyle":"labelStyle3",
-"animLength":30,
-"animSmoothness":20,
-"labelStyles": [ {"name":"labelStyle1", "value":"border: 1px solid black; margin-top: 2px; background: #FFFF00; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ,
+  var appData = {
+  "appName":"Pony Express vs Transcontinenal Railroad",
+  "appDescription":"Compares the paths of the Pony Express (1860) and the Transcontinental Railroad (1869)",
+  "author":"bretg",
+  "tags":"history, united states, 1800's",
+  "sources":"wikipedia",
+  "mapCenter":{"lat":39.5,"lng":-98.35},
+  "mapZoom":4,
+  "mapType":"roadmap",
+  "mapStyle":"normal",
+  "defaultLabelStyle":"labelStyle3",
+  "animLength":30,
+  "animSmoothness":20,
+  "labelStyles": [ {"name":"labelStyle1", "value":"border: 1px solid black; margin-top: 2px; background: #FFFF00; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ,
                    {"name":"labelStyle2", "value":"border: 1px solid black; margin-top: 2px; background: #99FF66; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle3", "value":"border: 1px solid black; margin-top: 2px; background: #00FFFF; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle4", "value":"border: 1px solid black; margin-top: 2px; background: #FF9933; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle5", "value":"border: 1px solid black; margin-top: 2px; background: #FF8181; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"}
                  ],
-"paths":[
+  "paths":[
    {"pathName":"Line 0","animSymbol":"arrow",
     "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10",
     "defaultTextOffsetY":"-20","defaultMarkerImage":"markers/marker.png",
@@ -78,10 +78,10 @@ var appData = {
               {"lat":"39.17372","lng":"-119.76093","text":"","time":"100","details":"Carson City, NV"},
               {"lat":"38.58950","lng":"-121.48699","text":"","time":"110","details":"Sacremento, CA"},
               {"lat":"37.77506","lng":"-122.42203","text":"","time":"115","details":"San Francisco, CA"}]},
-{"pathName":"Transcontinenal Railroad","animSymbol":"arrow",
-"pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10","defaultTextOffsetY":"-20",
-"defaultMarkerImage":"markers/marker_white.png",
-"points":[{"lat":"41.25923","lng":"-95.87494","text":"","time":"1","details":"Council Bluffs, IA"},
+  {"pathName":"Transcontinenal Railroad","animSymbol":"arrow",
+  "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10","defaultTextOffsetY":"-20",
+  "defaultMarkerImage":"markers/marker_white.png",
+  "points":[{"lat":"41.25923","lng":"-95.87494","text":"","time":"1","details":"Council Bluffs, IA"},
           {"lat":"41.45199","lng":"-96.49567","text":"","time":"5","details":"Fremont, NE"},
           {"lat":"41.45971","lng":"-97.37869","text":"","time":"10","details":"Columbus, NE"},
           {"lat":"40.72046","lng":"-99.10423","text":"","time":"15","details":"Kearny, NE"},
