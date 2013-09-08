@@ -57,14 +57,13 @@ A sample JSON file that feeds replay.js and replay_edit.js
   "animLength":30,
   "animSmoothness":20,
   "labelStyles": [ {"name":"labelStyle1", "value":"border: 1px solid black; margin-top: 2px; background: #FFFF00; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ,
-                   {"name":"labelStyle2", "value":"border: 1px solid black; margin-top: 2px; background: #99FF66; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+           {"name":"labelStyle2", "value":"border: 1px solid black; margin-top: 2px; background: #99FF66; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle3", "value":"border: 1px solid black; margin-top: 2px; background: #00FFFF; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle4", "value":"border: 1px solid black; margin-top: 2px; background: #FF9933; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle5", "value":"border: 1px solid black; margin-top: 2px; background: #FF8181; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
-		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"}
-                 ],
+		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ],
   "paths":[
-   {"pathName":"Line 0","animSymbol":"arrow",
+    {"pathName":"Line 0","animSymbol":"arrow",
     "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10",
     "defaultTextOffsetY":"-20","defaultMarkerImage":"markers/marker.png",
     "points":[{"lat":"39.76633","lng":"-94.84497","text":"","time":"1","details":"St. Joseph, MO"},
