@@ -1,261 +1,102 @@
-== Welcome to Rails
+== GeoReplay
 
-Rails is a web-application framework that includes everything needed to create
-database-backed web applications according to the Model-View-Control pattern.
+[This was a toy project done for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
+Git, Chef, and AWS. I've since put it on a shelf to focus on other projects, but could come back to it at some point.
+The Javascript/Google Maps part is pretty much done, but the ROR part is still rough, though basically functional.]
 
-This pattern splits the view (also called the presentation) into "dumb"
-templates that are primarily responsible for inserting pre-built data in between
-HTML tags. The model contains the "smart" domain objects (such as Account,
-Product, Person, Post) that holds all the business logic and knows how to
-persist themselves to a database. The controller handles the incoming requests
-(such as Save New Account, Update Product, Show Post) by manipulating the model
-and directing data to the view.
+GeoReplay allows the user to enter one or more paths in Google Maps with annotations at each node,
+and then push a "play" button to watch icons trace the path(s). I thought it might be interesting to
+create historic 'simulations' that gave a more visceral feeling about the geography and time. Planned topics
+included:
 
-In Rails, the model is handled by what's called an object-relational mapping
-layer entitled Active Record. This layer allows you to present the data from
-database rows as objects and embellish these data objects with business logic
-methods. You can read more about Active Record in
-link:files/vendor/rails/activerecord/README.html.
+* *Pony Express vs Transcontinental Railroad* -- They followed similar paths around the same period. This is the one that got finished. It's part of the "test" directory.
+* *Presidential travels of George Washington vs travels of some modern day President* -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his 8 years of travels concurrent with a recent president.
+* Battle lines -- find an interesting battle of the Revolution or Civil War and trace it out in time and geography
 
-The controller and view are handled by the Action Pack, which handles both
-layers by its two parts: Action View and Action Controller. These two layers
-are bundled in a single package due to their heavy interdependence. This is
-unlike the relationship between the Active Record and Action Pack that is much
-more separate. Each of these packages can be used independently outside of
-Rails. You can read more about Action Pack in
-link:files/vendor/rails/actionpack/README.html.
+The system was designed to be a multi-user web site with people being able to create 'replays' privately
+and then share them publically. Was going to explore the whole social-thing with forums and _likes_.
 
+== Design
 
-== Getting Started
+Libraries used: bootstrap, elabels3, Devise
 
-1. At the command prompt, create a new Rails application:
-       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)
+The two main GeoReplay javascript applications in lib/assets/javascripts were
+written in flat HTML before being integrated into Rails, so they aren't done in the "Rails Way".
 
-2. Change directory to <tt>myapp</tt> and start the web server:
-       <tt>cd myapp; rails server</tt> (run with --help for options)
+Replay
+* index --> shows all public replays
+* show --> uses replay.js to display the chosen replay
+* new --> calls edit
+* edit --> brings in the "replay_edit" javascript
+* create --> called by edit to create an entry for the first time
+* update --> called by edit to update an entry
+* delete
 
-3. Go to http://localhost:3000/ and you'll see:
-       "Welcome aboard: You're riding Ruby on Rails!"
+Schema - only two objects completed
+* replay
+* user --> set up by the Devise user management GEM
 
-4. Follow the guidelines to start developing your application. You can find
-the following resources handy:
-
-* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
-* Ruby on Rails Tutorial Book: http://www.railstutorial.org/
+Tables still on the drawing board: Tags, Markers, Styles, Metrics
 
 
-== Debugging Rails
+== GeoReplay JSON Format
 
-Sometimes your application goes wrong. Fortunately there are a lot of tools that
-will help you debug it and get it back on the rails.
+A sample JSON file that feeds replay.js and replay_edit.js
 
-First area to check is the application log files. Have "tail -f" commands
-running on the server.log and development.log. Rails will automatically display
-debugging and runtime information to these files. Debugging info will also be
-shown in the browser on requests from 127.0.0.1.
-
-You can also log your own messages directly into the log file from your code
-using the Ruby logger class from inside your controllers. Example:
-
-  class WeblogController < ActionController::Base
-    def destroy
-      @weblog = Weblog.find(params[:id])
-      @weblog.destroy
-      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")
-    end
-  end
-
-The result will be a message in your log file along the lines of:
-
-  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1!
-
-More information on how to use the logger is at http://www.ruby-doc.org/core/
-
-Also, Ruby documentation can be found at http://www.ruby-lang.org/. There are
-several books available online as well:
-
-* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)
-* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)
-
-These two books will bring you up to speed on the Ruby language and also on
-programming in general.
-
-
-== Debugger
-
-Debugger support is available through the debugger command when you start your
-Mongrel or WEBrick server with --debugger. This means that you can break out of
-execution at any point in the code, investigate and change the model, and then,
-resume execution! You need to install ruby-debug to run the server in debugging
-mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:
-
-  class WeblogController < ActionController::Base
-    def index
-      @posts = Post.all
-      debugger
-    end
-  end
-
-So the controller will accept the action, run the first line, then present you
-with a IRB prompt in the server window. Here you can do things like:
-
-  >> @posts.inspect
-  => "[#<Post:0x14a6be8
-          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,
-       #<Post:0x14a6620
-          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"
-  >> @posts.first.title = "hello from a debugger"
-  => "hello from a debugger"
-
-...and even better, you can examine how your runtime objects actually work:
-
-  >> f = @posts.first
-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
-  >> f.
-  Display all 152 possibilities? (y or n)
-
-Finally, when you're ready to resume execution, you can enter "cont".
-
-
-== Console
-
-The console is a Ruby shell, which allows you to interact with your
-application's domain model. Here you'll have all parts of the application
-configured, just like it is when the application is running. You can inspect
-domain models, change values, and save to the database. Starting the script
-without arguments will launch it in the development environment.
-
-To start the console, run <tt>rails console</tt> from the application
-directory.
-
-Options:
-
-* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications
-  made to the database.
-* Passing an environment name as an argument will load the corresponding
-  environment. Example: <tt>rails console production</tt>.
-
-To reload your controllers and models after launching the console run
-<tt>reload!</tt>
-
-More information about irb can be found at:
-link:http://www.rubycentral.org/pickaxe/irb.html
-
-
-== dbconsole
-
-You can go to the command line of your database directly through <tt>rails
-dbconsole</tt>. You would be connected to the database with the credentials
-defined in database.yml. Starting the script without arguments will connect you
-to the development database. Passing an argument will connect you to a different
-database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,
-PostgreSQL and SQLite 3.
-
-== Description of Contents
-
-The default directory structure of a generated Ruby on Rails application:
-
-  |-- app
-  |   |-- assets
-  |   |   |-- images
-  |   |   |-- javascripts
-  |   |   `-- stylesheets
-  |   |-- controllers
-  |   |-- helpers
-  |   |-- mailers
-  |   |-- models
-  |   `-- views
-  |       `-- layouts
-  |-- config
-  |   |-- environments
-  |   |-- initializers
-  |   `-- locales
-  |-- db
-  |-- doc
-  |-- lib
-  |   |-- assets
-  |   `-- tasks
-  |-- log
-  |-- public
-  |-- script
-  |-- test
-  |   |-- fixtures
-  |   |-- functional
-  |   |-- integration
-  |   |-- performance
-  |   `-- unit
-  |-- tmp
-  |   `-- cache
-  |       `-- assets
-  `-- vendor
-      |-- assets
-      |   |-- javascripts
-      |   `-- stylesheets
-      `-- plugins
-
-app
-  Holds all the code that's specific to this particular application.
-
-app/assets
-  Contains subdirectories for images, stylesheets, and JavaScript files.
-
-app/controllers
-  Holds controllers that should be named like weblogs_controller.rb for
-  automated URL mapping. All controllers should descend from
-  ApplicationController which itself descends from ActionController::Base.
-
-app/models
-  Holds models that should be named like post.rb. Models descend from
-  ActiveRecord::Base by default.
-
-app/views
-  Holds the template files for the view that should be named like
-  weblogs/index.html.erb for the WeblogsController#index action. All views use
-  eRuby syntax by default.
-
-app/views/layouts
-  Holds the template files for layouts to be used with views. This models the
-  common header/footer method of wrapping views. In your views, define a layout
-  using the <tt>layout :default</tt> and create a file named default.html.erb.
-  Inside default.html.erb, call <% yield %> to render the view using this
-  layout.
-
-app/helpers
-  Holds view helpers that should be named like weblogs_helper.rb. These are
-  generated for you automatically when using generators for controllers.
-  Helpers can be used to wrap functionality for your views into methods.
-
-config
-  Configuration files for the Rails environment, the routing map, the database,
-  and other dependencies.
-
-db
-  Contains the database schema in schema.rb. db/migrate contains all the
-  sequence of Migrations for your schema.
-
-doc
-  This directory is where your application documentation will be stored when
-  generated using <tt>rake doc:app</tt>
-
-lib
-  Application specific libraries. Basically, any kind of custom code that
-  doesn't belong under controllers, models, or helpers. This directory is in
-  the load path.
-
-public
-  The directory available for the web server. Also contains the dispatchers and the
-  default HTML files. This should be set as the DOCUMENT_ROOT of your web
-  server.
-
-script
-  Helper scripts for automation and generation.
-
-test
-  Unit and functional tests along with fixtures. When using the rails generate
-  command, template test files will be generated for you and placed in this
-  directory.
-
-vendor
-  External libraries that the application depends on. Also includes the plugins
-  subdirectory. If the app has frozen rails, those gems also go here, under
-  vendor/rails/. This directory is in the load path.
+var appData = {
+"appName":"Pony Express vs Transcontinenal Railroad",
+"appDescription":"Compares the paths of the Pony Express (1860) and the Transcontinental Railroad (1869)",
+"author":"bretg",
+"tags":"history, united states, 1800's",
+"sources":"wikipedia",
+"mapCenter":{"lat":39.5,"lng":-98.35},
+"mapZoom":4,
+"mapType":"roadmap",
+"mapStyle":"normal",
+"defaultLabelStyle":"labelStyle3",
+"animLength":30,
+"animSmoothness":20,
+"labelStyles": [ {"name":"labelStyle1", "value":"border: 1px solid black; margin-top: 2px; background: #FFFF00; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ,
+                   {"name":"labelStyle2", "value":"border: 1px solid black; margin-top: 2px; background: #99FF66; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle3", "value":"border: 1px solid black; margin-top: 2px; background: #00FFFF; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle4", "value":"border: 1px solid black; margin-top: 2px; background: #FF9933; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle5", "value":"border: 1px solid black; margin-top: 2px; background: #FF8181; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
+		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"}
+                 ],
+"paths":[
+   {"pathName":"Line 0","animSymbol":"arrow",
+    "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10",
+    "defaultTextOffsetY":"-20","defaultMarkerImage":"markers/marker.png",
+    "points":[{"lat":"39.76633","lng":"-94.84497","text":"","time":"1","details":"St. Joseph, MO"},
+              {"lat":"39.82541","lng":"-97.62451","text":"","time":"11","details":"Marysville, KS"},
+              {"lat":"40.69730","lng":"-99.11865","text":"","time":"21","details":"Fort Kearny, NE"},
+              {"lat":"40.89691","lng":"-100.08545","text":"","time":"25","details":"Gothenburg, NE"},
+              {"lat":"42.16340","lng":"-104.54315","text":"","time":"40","details":"Fort Laramie, WY"},
+              {"lat":"42.86993","lng":"-106.32980","text":"","time":"50","details":"Fort Caspar, WY"},
+              {"lat":"41.32733","lng":"-110.38239","text":"","time":"65","details":"Fort Bridger, WY"},
+              {"lat":"40.79510","lng":"-111.89232","text":"","time":"75","details":"Salt Lake City, UT"},
+              {"lat":"39.17372","lng":"-119.76093","text":"","time":"100","details":"Carson City, NV"},
+              {"lat":"38.58950","lng":"-121.48699","text":"","time":"110","details":"Sacremento, CA"},
+              {"lat":"37.77506","lng":"-122.42203","text":"","time":"115","details":"San Francisco, CA"}]},
+{"pathName":"Transcontinenal Railroad","animSymbol":"arrow",
+"pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10","defaultTextOffsetY":"-20",
+"defaultMarkerImage":"markers/marker_white.png",
+"points":[{"lat":"41.25923","lng":"-95.87494","text":"","time":"1","details":"Council Bluffs, IA"},
+          {"lat":"41.45199","lng":"-96.49567","text":"","time":"5","details":"Fremont, NE"},
+          {"lat":"41.45971","lng":"-97.37869","text":"","time":"10","details":"Columbus, NE"},
+          {"lat":"40.72046","lng":"-99.10423","text":"","time":"15","details":"Kearny, NE"},
+          {"lat":"41.14570","lng":"-100.75527","text":"","time":"20","details":"North Platte, NE"},
+          {"lat":"41.16321","lng":"-104.82588","text":"","time":"25","details":"Cheyenne, WY"},
+          {"lat":"41.34128","lng":"-105.59226","text":"","time":"30","details":"Laramie, WY"},
+          {"lat":"41.81203","lng":"-107.23888","text":"","time":"35","details":"Rawlins, WY"},
+          {"lat":"41.28904","lng":"-110.98181","text":"","time":"40","details":"Evanston, WY"},
+          {"lat":"41.20805","lng":"-111.96612","text":"","time":"45","details":"Ogden, UT"},
+          {"lat":"41.49543","lng":"-112.02981","text":"","time":"50","details":"Brigham, UT"},
+          {"lat":"41.59348","lng":"-112.53407","text":"","time":"54","details":"Promontory Summit, UT"},
+          {"lat":"40.83907","lng":"-115.78272","text":"","time":"58","details":"Elko, NV"},
+          {"lat":"41.04948","lng":"-117.70917","text":"","time":"62","details":"Winnemucca, NV"},
+          {"lat":"39.52902","lng":"-119.79025","text":"","time":"66","details":"Reno, NV"},
+          {"lat":"39.33407","lng":"-120.17986","text":"","time":"70","details":"Truckee, CA"},
+          {"lat":"38.61461","lng":"-121.50625","text":"","time":"75","details":"Sacremento, CA"},
+          {"lat":"37.78808","lng":"-122.44263","text":"","time":"80","details":"San Francisco, CA"}]};
+          
