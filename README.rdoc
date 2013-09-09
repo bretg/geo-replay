@@ -9,12 +9,21 @@ and then push a "play" button to watch icons trace the path(s). I thought it mig
 create historic 'simulations' that gave a more visceral feeling about the geography and time. Planned topics
 included:
 
-* Pony Express vs Transcontinental Railroad -- They followed similar paths around the same period. This is the one that got finished. It's part of the "test" directory.
+* Pony Express vs Transcontinental Railroad -- They followed similar paths around the same period. This is the one that got finished. See below for how to run it.
 * Presidential travels of George Washington vs travels of some modern day President -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his 8 years of travels concurrent with a recent president.
 * Battle lines -- find an interesting battle of the Revolution or Civil War and trace it out in time and geography
 
 The system was designed to be a multi-user web site with people being able to create 'replays' privately
 and then share them publically. Was going to explore the whole social-thing with forums and _likes_.
+
+== Example
+
+The Rails application should work in it's current framework state to play around with the edit and display functionality.
+
+To get a sense for what a GeoReplay might look like:
+1. checkout the tree from GitHub
+2. edit lib/assets/javascripts/replay.js and change assetPath to ../assets
+3. open public/pony_demo.html in a browser.
 
 == Design
 
@@ -63,10 +72,10 @@ A sample JSON file that feeds replay.js and replay_edit.js
 		   {"name":"labelStyle5", "value":"border: 1px solid black; margin-top: 2px; background: #FF8181; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"},
 		   {"name":"labelStyle6", "value":"border: 1px solid black; margin-top: 2px; background: #E0E0EB; padding: 2px; font-size: 75%; font-weight:bold; white-space:nowrap;"} ],
   "paths":[
-    {"pathName":"Line 0","animSymbol":"arrow",
-    "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10",
-    "defaultTextOffsetY":"-20","defaultMarkerImage":"markers/marker.png",
-    "points":[{"lat":"39.76633","lng":"-94.84497","text":"","time":"1","details":"St. Joseph, MO"},
+  {"pathName":"Line 0","animSymbol":"arrow",
+  "pathColor":"#000000","pathWidth":"2","defaultTextOffsetX":"10",
+  "defaultTextOffsetY":"-20","defaultMarkerImage":"markers/marker.png",
+  "points":[{"lat":"39.76633","lng":"-94.84497","text":"","time":"1","details":"St. Joseph, MO"},
               {"lat":"39.82541","lng":"-97.62451","text":"","time":"11","details":"Marysville, KS"},
               {"lat":"40.69730","lng":"-99.11865","text":"","time":"21","details":"Fort Kearny, NE"},
               {"lat":"40.89691","lng":"-100.08545","text":"","time":"25","details":"Gothenburg, NE"},
