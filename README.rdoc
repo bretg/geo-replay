@@ -1,8 +1,7 @@
 == GeoReplay
 
-[This is a partly finished toy project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
-Git, Chef, and AWS. I've since put it on a shelf to focus on other projects, but could come back to it at some point.
-The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]
+[An in-progress toy project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
+Git, and cloud deploy systems. The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]
 
 GeoReplay allows the user to enter one or more paths in Google Maps with annotations at each node,
 and then push a "play" button to watch icons trace the path(s). I thought it might be interesting to
@@ -132,7 +131,8 @@ A sample JSON block that feeds replay.js and replay_edit.js
 * Search by tags, display available tags in a nav bar
 * Like button
 * Figure out how to track view metrics
-* Create thumbnail maps (?)
+* Create thumbnail maps
+* Admin/editor screens
 
 Bugs
 
