@@ -31,9 +31,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>== GeoReplay</p>
+        <h2>GeoReplay</h2>
 
-<p>[An in-progress toy project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails, Git, and cloud deploy systems. The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]</p>
+<p>[An in-progress project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails, Git, and cloud deploy systems. The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]</p>
 
 <p>GeoReplay allows the user to enter one or more paths in Google Maps with annotations at each node,
 and then push a "play" button to watch icons trace the path(s). I thought it might be interesting to
@@ -51,11 +51,11 @@ Some attributes of each segment are configurable: markers, labels, label styles,
 lat/long, and a time code taken to reach the destination. Other attributes are set at the
 path level: color, width, symbol, and a bunch of default values for segments.</p>
 
-<p>== Example</p>
+<h2>Example</h2>
 
 <p>To get a sense for what a GeoReplay might look like:</p>
 
-<p><img src="../master/public/pony_demo.jpg" alt="GeoReplay Screenshot"></p>
+<p><img src="public/pony_demo.jpg" alt="GeoReplay Screenshot"></p>
 
 <p>or to get the animation effect:</p>
 
@@ -65,7 +65,7 @@ path level: color, width, symbol, and a bunch of default values for segments.</p
 <li>open public/pony_demo.html in a browser</li>
 </ol><p>The Rails application is pretty rough in its current framework state to play around with edit and display functionality.</p>
 
-<p>== Design</p>
+<h2>Design</h2>
 
 <p>Libraries used: bootstrap, elabels3, Devise</p>
 
@@ -89,7 +89,7 @@ written in flat HTML before being integrated into Rails, so they aren't done in 
 <li>user --&gt; set up by the Devise user management GEM</li>
 </ul><p>Functionality still on the drawing board: Tags, Markers, Styles, Metrics</p>
 
-<p>== GeoReplay JSON Format</p>
+<h2>GeoReplay JSON Format</h2>
 
 <p>A sample JSON block that feeds replay.js and replay_edit.js</p>
 
@@ -168,7 +168,9 @@ written in flat HTML before being integrated into Rails, so they aren't done in 
 <li>Figure out how to track view metrics</li>
 <li>Create thumbnail maps</li>
 <li>Admin/editor screens</li>
-</ul><p>Bugs</p>
+</ul>
+
+<h2>Bugs</h2>
 
 <ul>
 <li>Map is messed up if the center and zoom aren't set</li>
