@@ -1,5 +1,7 @@
 == GeoReplay
 
+{View this as a GitHub Page}[http://bretg.github.io/geo-replay/]
+
 [An in-progress toy project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
 Git, and cloud deploy systems. The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]
 
@@ -9,7 +11,7 @@ create historic 'simulations' that gave a more visceral feeling about the geogra
 included:
 
 * Pony Express vs Transcontinental Railroad -- They followed similar paths around the same period. This is the one that got finished. See below for how to run it.
-* Presidential travels of George Washington vs travels of some modern day President -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his 8 years of travels concurrent with a recent president.
+* Presidential travels of George Washington vs travels of some modern day President -- Washington never left the US, but did make tours of the NE and South. It was a major investment at the time. Might interesting to see his Presidential travels concurrent with a recent president.
 * Battle lines -- find an interesting battle of the Revolution or Civil War and trace it out in time and geography
 
 The system was designed to be a multi-user web site with people being able to create 'replays' privately
@@ -41,7 +43,7 @@ Libraries used: bootstrap, elabels3, Devise
 The two main GeoReplay javascript applications in lib/assets/javascripts were
 written in flat HTML before being integrated into Rails, so they aren't done in the "Rails Way".
 
-Replay
+Replay paths
 * index --> shows all public replays
 * show --> uses replay.js to display the chosen replay
 * new --> calls edit
