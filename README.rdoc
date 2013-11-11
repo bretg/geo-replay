@@ -2,7 +2,7 @@
 
 {View this as a GitHub Page}[http://bretg.github.io/geo-replay/]
 
-[An in-progress toy project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
+[An in-progress project for the purpose of exploring Javascript, Google Maps API, Bootstrap, Ruby On Rails,
 Git, and cloud deploy systems. The Javascript/Google Maps part is pretty much done, but the Rails part is still rough.]
 
 GeoReplay allows the user to enter one or more paths in Google Maps with annotations at each node,
